@@ -12,3 +12,12 @@ here's the pull request stuck eternally in limbo:
 NOTE THIS IS FROM A YEAR AGO.
 
 The bigger the company the slower it moves.
+
+To use this, do this in pubspec.yaml:
+
+video_player: # ^0.10.5+1
+    git:
+      url: git://github.com/crazedvic/plugins.git
+      path: packages/video_player/video_player
+
+The original author is much ambitious than I am, making it optional and everything.  Our app has no sound, so i didn't need that stuff.
