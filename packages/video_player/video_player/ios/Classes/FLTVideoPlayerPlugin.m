@@ -455,9 +455,11 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
   if ([@"init" isEqualToString:call.method]) {
     // Allow audio playback when the Ring/Silent switch is set to silent
     // [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
-                                       withOptions:AVAudioSessionCategoryOptionMixWithOthers
+      
+      [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient
+                                              mode:AVAudioSessionModeDefault options:AVAudioSessionCategoryOptionMixWithOthers
                                              error:nil];
+      
     for (NSNumber* textureId in _players) {
       [_registry unregisterTexture:[textureId unsignedIntegerValue]];
       [_players[textureId] dispose];
@@ -465,9 +467,10 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
     [_players removeAllObjects];
     result(nil);
   } else if ([@"create" isEqualToString:call.method]) {
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
-                                       withOptions:AVAudioSessionCategoryOptionMixWithOthers
+      [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient
+                                              mode:AVAudioSessionModeDefault options:AVAudioSessionCategoryOptionMixWithOthers
                                              error:nil];
+      
     NSDictionary* argsMap = call.arguments;
     FLTFrameUpdater* frameUpdater = [[FLTFrameUpdater alloc] initWithRegistry:_registry];
     NSString* assetArg = argsMap[@"asset"];
